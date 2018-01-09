@@ -1,6 +1,6 @@
 name: 52gpu.com
 description: 一系列实用易读的GPU开发指引
-url: https://www.52gpu.com
+url: https://zehuanw.github.io
 markdown: kramdown
 safe: true
 lsi: false
