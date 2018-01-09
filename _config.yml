@@ -1,7 +1,7 @@
-name: ericfontaine.io
-description: personal blog about open-source projects...
-url: https://ericfontaine.io
-markdown: redcarpet
+name: 52gpu.com
+description: 一系列实用易读的GPU开发指引
+url: https://www.52gpu.com
+markdown: kramdown
 safe: true
 lsi: false
 permalink: date
