@@ -24,3 +24,23 @@ Second, at the end of the script, I changed it to always open the new post in vi
     print 'New Jekyll post "' + title + '" has been created ' + filename + ' and git pushed.'
 
 Lastly, instead of putting the python script in my BIN PATH, I simply put it in the root of my github page git folder, so the script is always available on whatever machine I clone my github page repository. You can download my script [here](http://ericfontaine.io/jekyll-post).
+
+{% highlight ruby %}
+def show
+  @widget = Widget(params[:id])
+    respond_to do |format|
+    format.html # show.html.erb
+    format.json { render json: @widget }
+    end
+    end
+{% endhighlight %}
+
+{% highlight c++ %}
+int main(){
+    printf("%f Hello", 15);
+    return 0;
+}
+
+{% endhighlight %}
+
+中文最高！
