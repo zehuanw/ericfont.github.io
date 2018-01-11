@@ -130,10 +130,11 @@ def main():
 
     # if write flag is on, then try to open file with vi
     # removed by ERF, so always write: if args.write:
-    subprocess.call(['emacs', filename])
+    subprocess.call(['emacs', '-nw', filename])
 
     # ERF added auto commit to git repository
     subprocess.call(['jekyll', 'build'])
+    subprocess.call(['git', 'add', filename])
     subprocess.call(['git', 'commit', '-a', '-m "' + filename + '"'])
     subprocess.call(['git', 'push' ])
 
