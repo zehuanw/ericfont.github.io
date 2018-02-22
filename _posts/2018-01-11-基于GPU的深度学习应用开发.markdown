@@ -3,6 +3,22 @@ layout: post
 title: 基于GPU的深度学习应用开发
 ---
 # 这篇文章写给哪些人
-如果你是一个正在从事NVIDIA GPU相关开发工作的工程师，并且确信你的程序设计还不错[link](http://www.52gpu.club/2018/01/11/基于GPU的深度学习应用设计.html)，那么开发阶段相对来说只是一个**简单的**迭代过程。
+如果你是一个正在从事NVIDIA GPU相关开发工作的工程师，并且确信你的程序设计还不错[link](http://www.52gpu.club/2018/01/11/基于GPU的深度学习应用设计.html)，那么开发阶段相对来说只是一个**简单的**迭代过程。在这个迭代过程中你可能需要注意以下问题
+
+# 实现方法的选择
+实现GPU应用，大概有以下两种手段：Framework (如TensorFlow, Pytorch, Caffe), CUDA Library, CUDA C/C++ （在深度学习应用当中应谨慎考虑其他手段）
+一般来说我们在开发之初都会有一个Framework版本的程序作为基准。这个版本可以是公司算法人员给的，或者直接在网络中搜到的。你可以选择直接在这个版本上进行一些简单的修改来完成自己的工作。或者经过评估后这个版本的性能无法满足你的需要，而需要开发一个更快速的版本。
+如果是后者，那么确实需要做一些开发工作了。并且开发当中的优先级CUDA Library > CUDA C/C++。因为CUDA Library往往提供了简单高效的接口实现功能，用户可以快速实现想要的功能。如果CUDA Library不具备相应的特性，无法实现，再考虑自己动手用CUDA C/C++实现。
+而NVIDIA 针对深度学习应用提供了多种CUDA Library用于从不同侧面支持它们在GPU上的加速。
+## CUDNN
+CUDNN 是一套深度学习基础库，用于提供神经网络中最基本的操作（不同网络层的实现）， 比如卷积层，ReLu, tanh, softmax等。
+详细内容请参考[link](http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html)
+## CUBLAS
+你可能注意到CUDNN当中并未提供全连接层的实现，那是因为全连接层是可以使用cublas来实现的，cublas是用于进行稠密矩阵计算的库，包括最经典的GEMM。[link]()
+## TENSORRT
+TensorRT是NVIDIA开发的针对线上Inference设计的高效库。他针对GPU从性能上优化已经训练好的网络，从而提供更高效的Inference 性能。目前支持了caffe/tensorFlow。值得注意的是TensorRT并不能支持所有的网络（因为部分网络层[不支持](http://docs.nvidia.com/deeplearning/sdk/tensorrt-release-notes/index.html)），但是它提供了灵活的plugin接口用于用户自定义层。[link](http://docs.nvidia.com/deeplearning/sdk/tensorrt-developer-guide/index.html)
+## NCCL
+NCCL提供了丰富的接口，主要用于深度学习训练过程中多GPU/多节点通信[link](http://docs.nvidia.com/deeplearning/sdk/nccl-developer-guide/index.html)
+# 随处进行的错误检查
 
 
