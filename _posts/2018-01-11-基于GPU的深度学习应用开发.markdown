@@ -18,7 +18,12 @@ CUDNN 是一套深度学习基础库，用于提供神经网络中最基本的�
 ## TENSORRT
 TensorRT是NVIDIA开发的针对线上Inference设计的高效库。他针对GPU从性能上优化已经训练好的网络，从而提供更高效的Inference 性能。目前支持了caffe/tensorFlow。值得注意的是TensorRT并不能支持所有的网络（因为部分网络层[不支持](http://docs.nvidia.com/deeplearning/sdk/tensorrt-release-notes/index.html)），但是它提供了灵活的plugin接口用于用户自定义层。[link](http://docs.nvidia.com/deeplearning/sdk/tensorrt-developer-guide/index.html)
 ## NCCL
-NCCL提供了丰富的接口，主要用于深度学习训练过程中多GPU/多节点通信[link](http://docs.nvidia.com/deeplearning/sdk/nccl-developer-guide/index.html)
+NCCL提供了丰富的接口，主要用于深度学习训练过程中多GPU/多节点通信。[link](http://docs.nvidia.com/deeplearning/sdk/nccl-developer-guide/index.html)
+
 # 随处进行的错误检查
 
+错误检查有助于我们在程序开发/运行过程中发现问题修复问题。而错误检查大概可以分为以下两种：
+1. 只在开发过程中进行的检查（例如Assert）:因为大多数GPU计算和CPU是异步的，所以应当注意错误捕捉前应当保证GPU的处理结果已经返回到CPU，一个稳妥的解决办法是在捕捉前调用cudaStreamSynchronize()
+2. 运行时进行的错误检查：因为同步会导致性能的下降，一般在程序发布版本中，不再进行带有同步的错误捕捉。此时往往只检查一些本来就需要进行同步的api的返回值。
+Note: 值得注意的是，cuda API可以返回在它之前被调用的API的错误。比如，第一个API出现了错误，那么它和它后面的CUDA API将都返回这个错误，除非后面的CUDA API出现了其他错误。
 
