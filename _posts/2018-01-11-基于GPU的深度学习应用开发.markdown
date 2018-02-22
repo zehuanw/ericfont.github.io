@@ -11,7 +11,7 @@ title: 基于GPU的深度学习应用开发
 如果是后者，那么确实需要做一些开发工作了。并且开发当中的优先级CUDA Library > CUDA C/C++。因为CUDA Library往往提供了简单高效的接口实现功能，用户可以快速实现想要的功能。如果CUDA Library不具备相应的特性，无法实现，再考虑自己动手用CUDA C/C++实现。
 > 这里值得注意的是：针对基于Framework代码，我们并不鼓励一句一句进行翻译式的重写，你需要进行重新理解算法，并且找到优化点。因为你想实现比Framework更好的性能。你需要重新设计！
 
-而NVIDIA 针对深度学习应用提供了多种CUDA Library用于从不同侧面支持它们在GPU上的加速。
+NVIDIA 针对深度学习应用提供了多种CUDA Library用于从不同侧面支持它们在GPU上的加速。
 ## CUDNN
 CUDNN 是一套深度学习基础库，用于提供神经网络中最基本的操作（不同网络层的实现）， 比如卷积层，ReLu, tanh, softmax等。
 详细内容请参考[link](http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html)
